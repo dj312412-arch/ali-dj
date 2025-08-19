@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>سایت علی قربانی — فروشگاه، وبلاگ، عضویت</title>
+  <meta name="description" content="علی قربانی  با فروشگاه، وبلاگ، عضویت و فرم تماس در یک صفحه‌ی مینیمال و واکنش‌گرا.">
+  <style>
+    :root{
+      --bg:#ffffff; --text:#1b1f2a; --muted:#5b6275; --pri:#111827; --acc:#13ff02; --soft:#a805f9; --line:#080808;
+      --radius:14px; --shadow:0 10px 30px rgba(17,24,39,.08); --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:ui-sans-serif,-apple-system,Segoe UI,Roboto,"Vazirmatn",Tahoma;line-height:1.6;background:var(--bg);color:var(--text)}
+    a{color:var(--acc);text-decoration:none}
+    img{max-width:100%;height:auto;border-radius:12px}
+    .wrap{max-width:var(--max);margin:auto;padding:0 20px}
+    header{position:sticky;top:0;background:rgba(255,255,255,.8);backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line);z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--acc)}
+    .menu{display:flex;gap:16px;align-items:center}
+    .menu a{color:var(--muted)}
+    .chip{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:#334155;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px}
+    .btn{display:inline-flex;gap:8px;align-items:center;border-radius:12px;padding:10px 16px;font-weight:700;cursor:pointer;border:1px solid #0f172a10;background:#111827;color:#fff}
+    .btn.ghost{background:#fff;color:var(--text);border:1px solid var(--line)}
+    .btn.acc{background:var(--acc);border-color:var(--acc)}
+    .icon{width:18px;height:18px;display:inline-block}
+    .hero{padding:60px 0}
+    .hero .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+    h1{font-size:40px;line-height:1.15;margin:12px 0}
+    .lead{color:var(--muted);font-size:16px;margin-bottom:18px}
+    section{padding:40px 0}
+    h2{font-size:22px;margin:0 0 16px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .price{font-weight:800}
+    .muted{color:var(--muted)}
+    .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .cart-btn{position:relative}
+    .badge{position:absolute;top:-8px;left:-8px;background:#00ff22;color:#fff;border-radius:999px;padding:2px 6px;font-size:11px}
+    .bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .pill{display:inline-flex;gap:8px;background:var(--soft);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    input,textarea,select{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--text);font:inherit}
+    textarea{min-height:120px;resize:vertical}
+    .fine{font-size:13px;color:#6b7280}
+    footer{padding:28px 0;border-top:1px solid var(--line);color:#6b7280;margin-top:20px}
+    /* Cart drawer */
+    .drawer{position:fixed;inset:0 0 0 auto;display:none}
+    .drawer.active{display:block}
+    .overlay{position:absolute;inset:0;background:rgba(0,0,0,.2)}
+    .panel{position:absolute;right:0;top:0;bottom:0;width:360px;max-width:95vw;background:#fff;border-left:1px solid var(--line);box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .panel header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line)}
+    .panel .body{padding:16px;overflow:auto;flex:1}
+    .panel .foot{padding:16px;border-top:1px solid var(--line)}
+    .cart-item{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;margin-bottom:12px}
+    .qty{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+    .qty button{background:#fff;border:0;padding:6px 10px;cursor:pointer}
+    .qty span{padding:0 10px;border-inline:1px solid var(--line)}
+    /* Blog */
+    .post{display:flex;flex-direction:column;gap:10px}
+    .comments{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+    .comment{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
+    /* Auth */
+    .tabs{display:flex;gap:8px;margin-bottom:14px}
+    .tab{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer}
+    .tab.active{background:var(--acc);border-color:var(--acc);color:#fff}
+    .hidden{display:none !important}
+    @media (max-width: 940px){
+      .hero .grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      h1{font-size:32px}
+      header .menu .hide-sm{display:none}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>سایت علی قربانی  | Personal</span>
+      </div>
+      <nav class="menu">
+        <a href="#about">درباره</a>
+        <a href="#products">محصولات</a>
+        <a href="#blog" class="hide-sm">وبلاگ</a>
+        <a href="#auth" class="hide-sm">عضویت</a>
+        <a href="#contact" class="hide-sm">تماس</a>
+        <button id="cartBtn" class="btn ghost cart-btn" title="سبد خرید">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13L5.4 5M7 13l-2 9m12-9l-2 9" stroke="#111827" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span id="cartCount" class="badge">0</span>
+        </button>
+        <button id="userBtn" class="btn ghost" title="حساب کاربری">
+          <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z" stroke="#111827" stroke-width="1.5"/></svg>
+          <span id="userLabel" class="muted">ورود</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="about" class="hero">
+      <div class="grid">
+        <div>
+          <span class="chip">مینیمال • سریع • کاربردی</span>
+          <h1>سلام، من علی قربانی هستم — مترجم و برنامه نویس ادیتور عکس تایپیست</h1>
+          <p class="lead">ترکیب معرفی شخصی، فروشگاه و وبلاگ؛ جایی که هم خودتو می‌نمایونی، هم می‌فروشی، هم حرف می‌زنی. </p>
+          <div class="row">
+            <a class="btn acc" href="#products">دیدن محصولات</a>
+            <a class="btn ghost" href="#blog">خواندن وبلاگ</a>
+          </div>
+        </div>
+        <div>
+          <img src="https://uploadkon.ir/uploads/35be19_25Jowhareh-galleries-8-poster-9278af39-b767-4dd0-a73f-85c846fbebcc.png" alt="پروفایل.محیط کار:>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="bar">
+        <h2>🛒 محصولات</h2>
+        <div class="pill">
+          <span class="muted">مرتب‌سازی:</span>
+          <select id="sortSelect">
+            <option value="default">پیش‌فرض</option>
+            <option value="priceAsc">قیمت (ارزان‌تر)</option>
+            <option value="priceDesc">قیمت (گران‌تر)</option>
+          </select>
+        </div>
+      </div>
+      <div id="productsGrid" class="grid"></div>
+    </section>
+
+    <section id="blog">
+      <h2>📝 وبلاگ</h2>
+      <div id="postsGrid" class="grid"></div>
+    </section>
+
+    <section id="auth">
+      <h2>👤 عضویت و ورود</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="signup">ثبت‌نام</button>
+        <button class="tab" data-tab="login">ورود</button>
+      </div>
+      <div id="signupPane">
+        <form id="signupForm" class="grid">
+          <div class="card">
+            <div class="field">
+              <label>نام کامل</label>
+              <input name="name" placeholder="مثلا رضا" required>
+            </div>
+            <div class="field">
+              <label>ایمیل</label>
+              <input name="email" type="email" placeholder="" required>
+            </div>
+            <div class="field">
+              <label>رمز عبور</label>
+              <input name="password" type="password" placeholder="حداقل ۶ کاراکتر" minlength="6" required>
+            </div>
+            <button class="btn acc" type="submit">ثبت‌نام</button>
+            <span class="fine">با ایجاد حساب، شرایط استفاده را می‌پذیرید.</span>
+          </div>
+          <div class="card">
+            <h3>مزایای عضویت</h3>
+            <ul>
+              <li>پیگیری سفارش‌ها</li>
+              <li>ارسال نظر با نام کاربری</li>
+              <li>دسترسی به تخفیف‌های ویژه</li>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <div id="loginPane" class="hidden">
+        <form id="loginForm" class="card">
+          <div class="field">
+            <label>ایمیل</label>
+            <input name="email" type="email" required>
+          </div>
+          <div class="field">
+            <label>رمز عبور</label>
+            <input name="password" type="password" required>
+          </div>
+          <button class="btn acc" type="submit">ورود</button>
+          <span class="fine">هنوز حساب ندارید؟ روی تب «ثبت‌نام» بزنید.</span>
+        </form>
+      </div>
+      <div id="accountPane" class="hidden card" style="margin-top:12px">
+        <h3>سلام <span id="accountName"></span> 👋</h3>
+        <p class="muted">ایمیل: <span id="accountEmail"></span></p>
+        <div class="row">
+          <button id="logoutBtn" class="btn ghost">خروج</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>📩 تماس با ما</h2>
+      <form id="contactForm" class="grid">
+        <div class="card">
+          <div class="field">
+            <label>نام</label>
+            <input name="name" placeholder="نام شما" required>
+          </div>
+          <div class="field">
+            <label>ایمیل</label>
+            <input name="email" type="email" placeholder="dj312412@gmail.com" required>
+          </div>
+          <div class="field">
+            <label>پیام</label>
+            <textarea name="message" placeholder="سلام..." required></textarea>
+          </div>
+          <button class="btn acc" type="submit">ارسال پیام</button>
+          <span class="fine">در کمتر از ۲۴ ساعت پاسخ می‌دهیم.</span>
+        </div>
+        <div class="card">
+          <h3>راه‌های ارتباطی</h3>
+          <p class="muted">ایمیل: dj312412@gmail.com<br> <br>لوکیشن: قزوین</p>
+          <h3>چطور همکاری می‌کنیم</h3>
+          <p class="fine">۱) کشف نیاز • ۲) نمونه اولیه • ۳) اجرا و تحویل • ۴) بهبود بر اساس فیدبک</p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2025  —  آماده‌ی رشد</div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div id="cartDrawer" class="drawer" aria-hidden="true">
+    <div class="overlay" id="cartOverlay"></div>
+    <div class="panel">
+      <header class="nav">
+        <strong>سبد خرید</strong>
+        <button id="closeCart" class="btn ghost">بستن</button>
+      </header>
+      <div class="body">
+        <div id="cartItems"></div>
+      </div>
+      <div class="foot">
+        <div class="bar">
+          <span class="muted">جمع کل:</span>
+          <strong id="cartTotal" class="price">0 €</strong>
+        </div>
+        <div class="row">
+          <button id="checkoutBtn" class="btn acc" style="flex:1">تسویه حساب</button>
+          <button id="clearCartBtn" class="btn ghost">خالی کردن</button>
+        </div>
+        <span class="fine">پرداخت در این نسخه شبیه‌سازی شده است.</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ---------- Data ----------
+  const state = {
+    products: [
+      {id:'p1', title:'ترجمه متن یک صفخه ای در یک روز', price:225000, img:"https://uploadkon.ir/uploads/0d6d19_25Jowhareh-galleries-8-poster-70db6863-573e-4b4b-bb54-108fda8cf7ff.png", desc:" 300قیمت از 150 تا", stock:1000},
+      {id:'p2', title:"ترجمه متن دوصفحه ای در دوروز", price:325000, img:'https://uploadkon.ir/uploads/261419_25Jowhareh-galleries-8-poster-cee8190d-2c00-4fbe-8293-acd0b05b6fe2.jpeg', desc:"قیمت از 250 تا 400", stock:1000},
+      {id:'p3', title:"ترجمه متن سه صفحه ای در سهروز", price:425000, img:'https://uploadkon.ir/uploads/0d6d19_25Jowhareh-galleries-8-poster-70db6863-573e-4b4b-bb54-108fda8cf7ff.png', desc:"قیمت از 350 تا500", stock:1000},
+      {id:'p4', title:"ترجمه متن سه صفحه ای در چهارروز", price:525000, img:'https://uploadkon.ir/uploads/4b0419_25Jowhareh-galleries-8-poster-f8f67b3e-81d5-4ebe-847b-8f6fd7e8f924.png', desc:"قیمت از 450 تا 600", stock:1000},
+      {id:'p5', title:"ترجمه تخصصی", price:0, img:'https://uploadkon.ir/uploads/af9b19_25Jowhareh-galleries-8-poster-6941fb6a-472f-4072-a174-82323f1171f0.png', desc:"قیمت توافقی", stock:1000},
+      {id:'p6', title:"سایر خدمات", price:0, img:'https://uploadkon.ir/uploads/3fe319_25adobe-photoshop-logo.png', desc:"قیمت توافقی", stock:1000},
+    ],
+    posts: [
+      {id:'b1', title:"کارهای ترجه ی من", img:'https://uploadkon.ir/uploads/2c8f19_25Untitled-1.jpg', excerpt:'ترجمه با تجربه 2 ساله', content:""},
+      {id:'b2', title:"  کارهای فتوشاپ", img:'https://uploadkon.ir/uploads/8bbd19_253.jpg', excerpt:'کار با فتوشاپ در اسرع وقت با هزینه مناسب', content:""},
+      {id:'b3', title:"کار های تایپ و برنامه نویسی من", img:'https://uploadkon.ir/uploads/446c19_25Screenshot-2025-08-20-000548.png', excerpt:'تایپ حرف ای و سریع', content:""},
+    ],
+    cart: JSON.parse(localStorage.getItem('cart')||'[]'),
+    user: JSON.parse(localStorage.getItem('user')||'null')
+  };
+
+  // ---------- Helpers ----------
+  const fmt = n => new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'}).format(n);
+  const q = (s,root=document)=>root.querySelector(s);
+  const qa = (s,root=document)=>[...root.querySelectorAll(s)];
+  const saveCart = ()=>localStorage.setItem('cart', JSON.stringify(state.cart));
+  const saveUser = ()=>state.user?localStorage.setItem('user', JSON.stringify(state.user)):localStorage.removeItem('user');
+
+  // ---------- Render Products ----------
+  const productsGrid = q('#productsGrid');
+  function renderProducts(list=state.products){
+    productsGrid.innerHTML = '';
+    list.forEach(p=>{
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.innerHTML = `
+        <img src="${p.img}" alt="${p.title}">
+        <h3>${p.title}</h3>
+        <p class="muted">${p.desc}</p>
+        <div class="bar">
+          <span class="price">${fmt(p.price)}</span>
+          <span class="fine">موجودی: ${p.stock}</span>
+        </div>
+        <div class="row">
+          <button class="btn acc" data-add="${p.id}">افزودن به سبد</button>
+          <button class="btn ghost" data-buy="${p.id}">خرید فوری</button>
+        </div>`;
+      productsGrid.appendChild(el);
+    });
+  }
+  renderProducts();
+
+  // Sorting
+  q('#sortSelect').addEventListener('change', e=>{
+    const v = e.target.value;
+    let list = [...state.products];
+    if(v==='priceAsc') list.sort((a,b)=>a.price-b.price);
+    if(v==='priceDesc') list.sort((a,b)=>b.price-a.price);
+    renderProducts(list);
+  });
+
+  // ---------- Cart ----------
+  const cartBtn = q('#cartBtn'), cartDrawer = q('#cartDrawer'), cartCount = q('#cartCount');
+  const cartItems = q('#cartItems'), cartTotal = q('#cartTotal');
+  const openCart = ()=>{cartDrawer.classList.add('active');cartDrawer.setAttribute('aria-hidden','false')};
+  const closeCart = ()=>{cartDrawer.classList.remove('active');cartDrawer.setAttribute('aria-hidden','true')};
+  q('#closeCart').onclick = closeCart; q('#cartOverlay').onclick = closeCart;
+
+  function addToCart(id, qty=1){
+    const product = state.products.find(p=>p.id===id); if(!product) return;
+    const item = state.cart.find(i=>i.id===id);
+    if(item) item.qty += qty; else state.cart.push({id, qty});
+    saveCart(); updateCartUI();
+  }
+  function setQty(id, qty){
+    const it = state.cart.find(i=>i.id===id); if(!it) return;
+    it.qty = Math.max(1, qty|0); saveCart(); updateCartUI();
+  }
+  function removeItem(id){
+    state.cart = state.cart.filter(i=>i.id!==id); saveCart(); updateCartUI();
+  }
+  function cartSum(){
+    return state.cart.reduce((sum,i)=>{
+      const p = state.products.find(p=>p.id===i.id); return sum + (p?p.price*i.qty:0);
+    },0);
+  }
+  function updateCartUI(){
+    cartCount.textContent = state.cart.reduce((n,i)=>n+i.qty,0);
+    cartItems.innerHTML = '';
+    state.cart.forEach(i=>{
+      const p = state.products.find(p=>p.id===i.id);
+      if(!p) return;
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <img src="${p.img}" alt="${p.title}">
+        <div>
+          <strong>${p.title}</strong>
+          <div class="fine">${fmt(p.price)} / واحد</div>
+          <div class="qty" role="group" aria-label="تعداد">
+            <button data-dec="${i.id}" aria-label="کاهش">−</button>
+            <span>${i.qty}</span>
+            <button data-inc="${i.id}" aria-label="افزایش">+</button>
+          </div>
+        </div>
+        <div style="text-align:end">
+          <div class="price">${fmt(p.price*i.qty)}</div>
+          <button class="fine" data-remove="${i.id}" style="background:none;border:0;color:#ef4444;cursor:pointer">حذف</button>
+        </div>`;
+      cartItems.appendChild(row);
+    });
+    cartTotal.textContent = fmt(cartSum());
+  }
+  updateCartUI();
+
+  // Product buttons delegation
+  productsGrid.addEventListener('click', e=>{
+    const add = e.target.closest('[data-add]'); const buy = e.target.closest('[data-buy]');
+    if(add){ addToCart(add.getAttribute('data-add'),1); openCart(); }
+    if(buy){ addToCart(buy.getAttribute('data-buy'),1); openCart(); }
+  });
+
+  // Cart interactions
+  cartItems.addEventListener('click', e=>{
+    const inc = e.target.closest('[data-inc]'); const dec = e.target.closest('[data-dec]'); const rem = e.target.closest('[data-remove]');
+    if(inc) setQty(inc.dataset.inc, (state.cart.find(i=>i.id===inc.dataset.inc)?.qty||1) + 1);
+    if(dec) setQty(dec.dataset.dec, (state.cart.find(i=>i.id===dec.dataset.dec)?.qty||1) - 1);
+    if(rem) removeItem(rem.dataset.remove);
+  });
+  q('#checkoutBtn').addEventListener('click', ()=>{
+    if(state.cart.length===0){ alert('سبد شما خالی است.'); return; }
+    // Mock checkout
+    const name = state.user?.name || 'مشتری عزیز';
+    alert(`${name}، سفارش شما با مبلغ ${fmt(cartSum())} ثبت شد (شبیه‌سازی).`);
+    state.cart = []; saveCart(); updateCartUI(); closeCart();
+  });
+  q('#clearCartBtn').addEventListener('click', ()=>{ state.cart=[]; saveCart(); updateCartUI(); });
+
+  cartBtn.addEventListener('click', openCart);
+
+  // ---------- Blog + Comments ----------
+  const postsGrid = q('#postsGrid');
+  function getComments(postId){
+    return JSON.parse(localStorage.getItem('comments:'+postId) || '[]');
+  }
+  function saveComments(postId, list){
+    localStorage.setItem('comments:'+postId, JSON.stringify(list));
+  }
+  function renderPost(p){
+    const wrap = document.createElement('article'); wrap.className='card post';
+    const comments = getComments(p.id);
+    wrap.innerHTML = `
+      <img src="${p.img}" alt="${p.title}">
+      <h3>${p.title}</h3>
+      <p class="muted">${p.excerpt}</p>
+      <details>
+        <summary>ادامه مطلب</summary>
+        <p style="margin-top:10px">${p.content}</p>
+      </details>
+      <div class="comments" id="cwrap-${p.id}">
+        <strong>نظرات (${comments.length})</strong>
+        <div id="clist-${p.id}"></div>
+        <form id="cform-${p.id}" class="row" style="margin-top:10px;flex-direction:column;align-items:stretch">
+          <input name="name" placeholder="نام" value="${state.user?.name||''}" required>
+          <textarea name="text" placeholder="نظر شما..." required></textarea>
+          <button class="btn acc" type="submit">ارسال نظر</button>
+        </form>
+        <span class="fine">نظرات فقط روی این دستگاه ذخیره می‌شود (نسخهٔ دمو).</span>
+      </div>`;
+    postsGrid.appendChild(wrap);
+    renderComments(p.id);
+    q('#cform-'+p.id).addEventListener('submit', e=>{
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = (fd.get('name')||'بی‌نام').toString().trim();
+      const text = (fd.get('text')||'').toString().trim();
+      if(!text) return;
+      const list = getComments(p.id);
+      list.push({name, text, ts: Date.now()});
+      saveComments(p.id, list);
+      e.target.reset();
+      renderComments(p.id);
+    });
+  }
+  function renderComments(postId){
+    const list = getComments(postId);
+    const area = q('#clist-'+postId); if(!area) return;
+    area.innerHTML = '';
+    list.slice().reverse().forEach(c=>{
+      const d = new Date(c.ts);
+      const el = document.createElement('div');
+      el.className='comment';
+      el.innerHTML = `<strong>${c.name}</strong> · <span class="fine">${d.toLocaleDateString('fa-IR')} ${d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}</span>
+        <div>${c.text.replace(/</g,'&lt;')}</div>`;
+      area.appendChild(el);
+    });
+    const title = q('#cwrap-'+postId+' > strong');
+    if(title) title.textContent = `نظرات (${list.length})`;
+  }
+  function renderPosts(){
+    postsGrid.innerHTML = '';
+    state.posts.forEach(renderPost);
+  }
+  renderPosts();
+
+  // ---------- Auth ----------
+  const userBtn = q('#userBtn'), userLabel = q('#userLabel');
+  const tabs = qa('.tab'); const signupPane = q('#signupPane'), loginPane = q('#loginPane'), accountPane = q('#accountPane');
+  function setTab(name){
+    tabs.forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+    signupPane.classList.toggle('hidden', name!=='signup');
+    loginPane.classList.toggle('hidden', name!=='login');
+  }
+  tabs.forEach(t=>t.addEventListener('click', ()=>setTab(t.dataset.tab)));
+
+  function updateAuthUI(){
+    if(state.user){
+      userLabel.textContent = state.user.name.split(' ')[0];
+      q('#accountName').textContent = state.user.name;
+      q('#accountEmail').textContent = state.user.email;
+      signupPane.classList.add('hidden'); loginPane.classList.add('hidden'); accountPane.classList.remove('hidden');
+    }else{
+      userLabel.textContent = 'ورود';
+      accountPane.classList.add('hidden'); setTab('signup');
+    }
+  }
+  updateAuthUI();
+
+  q('#signupForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const name = fd.get('name').toString().trim();
+    const email = fd.get('email').toString().trim().toLowerCase();
+    const password = fd.get('password').toString();
+    if(password.length<6){ alert('رمز عبور حداقل ۶ کاراکتر.'); return; }
+    // Mock create
+    const users = JSON.parse(localStorage.getItem('users')||'{}');
+    if(users[email]){ alert('این ایمیل قبلاً ثبت شده است. وارد شوید.'); setTab('login'); return; }
+    users[email] = {name, email, password};
+    localStorage.setItem('users', JSON.stringify(users));
+    state.user = {name, email}; saveUser(); updateAuthUI(); alert('ثبت‌نام انجام شد. خوش آمدی!');
+  });
+
+  q('#loginForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const email = fd.get('email').toString().trim().toLowerCase();
+    const password = fd.get('password').toString();
+    const users = JSON.parse(localStorage.getItem('users')||'{}');
+    if(!users[email] || users[email].password!==password){ alert('ایمیل یا رمز نادرست است.'); return; }
+    state.user = {name: users[email].name, email}; saveUser(); updateAuthUI(); alert('ورود موفق.');
+  });
+
+  q('#logoutBtn').addEventListener('click', ()=>{
+    state.user = null; saveUser(); updateAuthUI(); alert('خارج شدید.');
+  });
+
+  userBtn.addEventListener('click', ()=>{ location.hash = '#auth'; });
+
+  // ---------- Contact ----------
+  q('#contactForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const name = fd.get('name'); const email = fd.get('email'); const msg = fd.get('message');
+    alert(`ممنون ${name}! پیام شما دریافت شد (نسخه‌ی دمو).`);
+    e.target.reset();
+  });
+
+  // ---------- Quality ----------
+  // Restore cart UI after reload, wire up shortcut keys
+  window.addEventListener('keydown', (e)=>{
+    if(e.key==='c' && (e.ctrlKey||e.metaKey)) { e.preventDefault(); openCart(); }
+    if(e.key==='Escape') closeCart();
+  });
+  </script>
+</body>
+</html>
