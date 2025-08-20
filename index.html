@@ -7,7 +7,7 @@
   <meta name="description" content="علی قربانی  با فروشگاه، وبلاگ، عضویت و فرم تماس در یک صفحه‌ی مینیمال و واکنش‌گرا.">
   <style>
     :root{
-      --bg:#ffffff; --text:#1b1f2a; --muted:#5b6275; --pri:#111827; --acc:#13ff02; --soft:#a805f9; --line:#080808;
+      --bg:#000000; --text:#1b1f2a; --muted:#5b6275; --pri:#111827; --acc:#13ff02; --soft:#a805f9; --line:#080808;
       --radius:14px; --shadow:0 10px 30px rgba(17,24,39,.08); --max:1100px;
     }
     *{box-sizing:border-box}
@@ -529,5 +529,192 @@
     if(e.key==='Escape') closeCart();
   });
   </script>
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>وب‌سایت حرفه‌ای گرافیکی</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6 text-center">
+    <h1 class="text-4xl font-bold">وب‌سایت حرفه‌ای گرافیکی</h1>
+    <p id="welcomeUser"></p>
+  </header>
+
+  <main class="p-6">
+
+    <!-- Gallery -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">گالری تصاویر</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white shadow rounded overflow-hidden">
+          <img src="https://via.placeholder.com/400x300" alt="Artwork 1" class="w-full h-48 object-cover" />
+          <p class="p-2 font-medium text-center">Artwork 1</p>
+        </div>
+        <div class="bg-white shadow rounded overflow-hidden">
+          <img src="https://via.placeholder.com/400x300" alt="Artwork 2" class="w-full h-48 object-cover" />
+          <p class="p-2 font-medium text-center">Artwork 2</p>
+        </div>
+        <div class="bg-white shadow rounded overflow-hidden">
+          <img src="https://via.placeholder.com/400x300" alt="Artwork 3" class="w-full h-48 object-cover" />
+          <p class="p-2 font-medium text-center">Artwork 3</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">بلاگ</h2>
+      <div class="space-y-4">
+        <div class="bg-white shadow p-4 rounded">
+          <h3 class="text-xl font-bold mb-2">Blog Post 1</h3>
+          <p>This is a sample blog post.</p>
+        </div>
+        <div class="bg-white shadow p-4 rounded">
+          <h3 class="text-xl font-bold mb-2">Blog Post 2</h3>
+          <p>Another blog post for demonstration.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">سفارش</h2>
+      <form id="orderForm" class="bg-white p-4 shadow rounded space-y-4">
+        <input type="text" placeholder="نام محصول" class="w-full border p-2 rounded" id="orderProduct" required />
+        <textarea placeholder="توضیحات" class="w-full border p-2 rounded" id="orderDetails" required></textarea>
+        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">ارسال سفارش</button>
+      </form>
+    </section>
+
+    <!-- Comments -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">نظرات</h2>
+      <form id="commentForm" class="mb-4">
+        <textarea placeholder="نظر خود را وارد کنید" class="w-full border p-2 rounded" id="commentInput" required></textarea>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded mt-2 hover:bg-green-700">ثبت نظر</button>
+      </form>
+      <div id="commentsList" class="space-y-2"></div>
+    </section>
+
+    <!-- Registration -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">ثبت‌نام</h2>
+      <form id="registerForm" class="bg-white p-4 shadow rounded space-y-4">
+        <input type="text" placeholder="نام کاربری" class="w-full border p-2 rounded" id="registerInput" required />
+        <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">ثبت‌نام</button>
+      </form>
+    </section>
+
+    <!-- Admin Login (Hidden initially) -->
+    <section id="adminLoginSection" class="mb-12 hidden">
+      <h2 class="text-2xl font-semibold mb-4">ورود ادمین</h2>
+      <form id="adminLoginForm" class="bg-white p-4 shadow rounded space-y-4">
+        <input type="password" placeholder="رمز عبور ادمین" class="w-full border p-2 rounded" id="adminPassword" required />
+        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">ورود</button>
+      </form>
+    </section>
+
+    <!-- Admin Panel (Hidden initially) -->
+    <section id="adminPanel" class="mb-12 hidden">
+      <h2 class="text-2xl font-semibold mb-4">پنل ادمین</h2>
+      <div>
+        <h3 class="text-xl font-bold mb-2">پیام‌ها</h3>
+        <div id="adminMessages" class="bg-gray-200 p-4 rounded space-y-2"></div>
+      </div>
+      <div class="mt-4">
+        <h3 class="text-xl font-bold mb-2">سفارش‌ها</h3>
+        <div id="adminOrders" class="bg-gray-200 p-4 rounded space-y-2"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-gray-800 text-white text-center p-4">
+    © 2025 وب‌سایت حرفه‌ای گرافیکی
+  </footer>
+
+  <script>
+    let currentUser = '';
+    const users = [];
+    const comments = [];
+    const orders = [];
+
+    // Registration
+    document.getElementById('registerForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const username = document.getElementById('registerInput').value.trim();
+      if(username && !users.includes(username)){
+        users.push(username);
+        currentUser = username;
+        document.getElementById('welcomeUser').textContent = "خوش آمدی، " + currentUser + "!";
+        document.getElementById('registerForm').reset();
+      }
+    });
+
+    // Comment
+    document.getElementById('commentForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const comment = document.getElementById('commentInput').value.trim();
+      if(comment){
+        comments.push({ user: currentUser || 'مهمان', text: comment });
+        const div = document.createElement('div');
+        div.className = 'bg-gray-200 p-2 rounded';
+        div.innerHTML = "<strong>" + (currentUser || 'مهمان') + ":</strong> " + comment;
+        document.getElementById('commentsList').appendChild(div);
+        document.getElementById('commentForm').reset();
+
+        // Update admin panel
+        const adminDiv = document.createElement('div');
+        adminDiv.textContent = (currentUser || 'مهمان') + ": " + comment;
+        document.getElementById('adminMessages').appendChild(adminDiv);
+      }
+    });
+
+    // Order
+    document.getElementById('orderForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const product = document.getElementById('orderProduct').value.trim();
+      const details = document.getElementById('orderDetails').value.trim();
+      if(product && details){
+        orders.push({ product, details });
+        alert('سفارش ثبت شد!');
+        document.getElementById('orderForm').reset();
+
+        // Update admin panel
+        const orderDiv = document.createElement('div');
+        orderDiv.innerHTML = "<strong>" + product + ":</strong> " + details;
+        document.getElementById('adminOrders').appendChild(orderDiv);
+      }
+    });
+
+    // Admin login toggle
+    document.addEventListener('keydown', function(e){
+      // Ctrl + Shift + A برای نمایش فرم ادمین
+      if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a'){
+        document.getElementById('adminLoginSection').classList.remove('hidden');
+        alert('فرم ورود ادمین ظاهر شد!');
+      }
+    });
+
+    // Admin login
+    document.getElementById('adminLoginForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const pass = document.getElementById('adminPassword').value;
+      if(pass === 'admin123'){
+        document.getElementById('adminPanel').classList.remove('hidden');
+        document.getElementById('adminLoginSection').classList.add('hidden');
+        alert('ورود موفق!');
+      } else {
+        alert('رمز عبور اشتباه است!');
+      }
+      document.getElementById('adminLoginForm').reset();
+    });
+  </script>
+
 </body>
 </html>
